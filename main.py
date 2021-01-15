@@ -315,7 +315,7 @@ if __name__ == '__main__':
 
     # Начальное положение
     if b_p.split('-')[1] == 'True':
-        # Определение слева направо
+        # Начальное определение
         checkers.append(Checker(31, 20 * 0, 'white', white_sprite))
         checkers.append(Checker(31, 20 * 1, 'white', white_sprite))
         checkers.append(Checker(31, 20 * 2, 'white', white_sprite))
@@ -354,6 +354,7 @@ if __name__ == '__main__':
         checkers.append(Checker(31 + 1100, 800 - 38 - (20 * 0), 'black', black_sprite))
         checkers.append(Checker(31 + 1100, 800 - 38 - (20 * 1), 'black', black_sprite))
 
+    # Свободное определение
     else:
         checkers.append(Checker(31, 20 * 0, 'white', white_sprite))
         checkers.append(Checker(31, 20 * 1, 'white', white_sprite))
@@ -440,8 +441,12 @@ if __name__ == '__main__':
                             checkers.remove(checker)
                 if checker.clicked:
                     mouse_pos = pygame.mouse.get_pos()
-                    checker.x_pos = mouse_pos[0]
-                    checker.y_pos = mouse_pos[1]
+                    if mouse_pos[0] < 1160:
+                        checker.x_pos = mouse_pos[0]
+                    elif mouse_pos[0] > 1160:
+                        checker.x_pos = 1160
+                    if mouse_pos[1] < 762:
+                        checker.y_pos = mouse_pos[1]
 
         draw_board()
         clock.tick(fps)
